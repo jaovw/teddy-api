@@ -1,0 +1,20 @@
+{
+  "name": "teddy-api",
+  "version": "1.0.0",
+  "repository": "https://github.com/jaovw/teddy-api.git",
+  "author": "jaovw <joojvw@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.7.2"
+  }
+}
