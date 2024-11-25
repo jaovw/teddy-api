@@ -5,15 +5,23 @@
   "author": "jaovw <joojvw@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "start": "yarn db:migrate && ts-node src/server.ts",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "db:migrate": "npx sequelize db:migrate && npx sequelize db:seed:all",
+    "db:undo": "npx sequelize db:migrate:undo"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "mysql2": "^3.11.4",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "@types/node": "^22.9.2",
+    "@types/node": "^22.9.3",
+    "@types/sequelize": "^4.28.20",
+    "sequelize-cli": "^6.6.2",
+    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.2"
   }
