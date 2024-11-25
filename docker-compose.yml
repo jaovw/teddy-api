@@ -18,6 +18,11 @@ services:
             test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
             timeout: 5s
             retries: 10
+    redis:
+        image: redis:alpine
+        container_name: redis
+        ports:
+        - $REDIS_PORT:$REDIS_PORT
     app:
         depends_on:
             mysqldb:
@@ -35,6 +40,9 @@ services:
             - MYSQL_DATABASE=$MYSQL_DATABASE
             - MYSQL_USERNAME=$MYSQL_USERNAME
             - MYSQL_PASSWORD=$MYSQL_PASSWORD
+            - REDIS_HOST=$REDIS_HOST
+            - REDIS_PORT=$REDIS_PORT
+            - JWT_SECRET_KEY=$JWT_SECRET_KEY
         ports:
             - $NODE_LOCAL_PORT:$NODE_LOCAL_PORT
         stdin_open: true

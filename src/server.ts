@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import { routeMiddleware } from "./middlewares/route-middleware";
-import router from "./routes/index";
+import routes from "./routes/_routes";
 import { connectDB } from "./config/db";
 
 // Configurar variáveis de ambiente
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(routeMiddleware);
 
 // Rotas
-app.use(router);
+app.use("", routes);
 
 app.listen(port, async () => {
   await connectDB();
