@@ -4,7 +4,8 @@ import { urlService } from "../services/url-service";
 export namespace urlController {
   export const criar = async (req: Request, res: Response): Promise<void> => {
     try {
-      const { url_origem, id_usuario } = req.body;
+      const { url_origem } = req.body;
+      const { id_usuario } = (req as any).user
 
       const novaUrl = await urlService.criar({ url_origem, id_usuario: id_usuario || null });
 
@@ -41,9 +42,14 @@ export namespace urlController {
     }
   };
 
-  export const deletar = async (req: Request, res: Response): Promise<void> => {
+  export const deletar = async (req: Request, res: Response): Promise<any> => {
     try {
       const { id } = req.params;
+      const usuario = (req as any).user
+
+      if (usuario?.auth == false) {
+        return res.status(401).json({ message: "Usuário nao autenticado" });
+      }
 
       await urlService.deletar(Number(id));
 

@@ -1,34 +1,30 @@
 import { redisClient } from "../config/redis";
 import jwt from "jsonwebtoken";
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, Handler } from "express";
 
-export const authMiddleware = async (
+export const authMiddleware: Handler = async (
   req: Request,
   res: Response,
   next: NextFunction
-) => {
-  const authHeader = req.headers.authorization;
-
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Token não fornecido ou inválido" });
-  }
-
-  const token = authHeader.split(" ")[1];
-
+): Promise<any> => {
   try {
-    // Verifica o token no Redis
-    const tokenData = await redisClient.get(`auth:${token}`);
-    if (!tokenData) {
-      return res.status(401).json({ error: "Token expirado ou inválido" });
-    }
+    const authHeader = req.headers.authorization;
+    (req as any).user = { auth: false };
 
-    // Decodifica o JWT
-    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY!) as { id: number };
-    // req.body.id = decoded.id;
+    if (authHeader && authHeader?.startsWith("Bearer ")) {
+      let token = authHeader.split(" ")[1];
 
+      // Verifica o token no Redis comentado para analisar uma melhor forma de aplicação
+      // const tokenData = await redisClient.get(token);
+
+      // Decodifica o JWT
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY!) as { id: number };
+      (req as any).user = { id_usuario: decoded.id, auth: true };
+
+    }    
     next();
   } catch (err) {
     console.error("Erro de autenticação:", err);
-    return next(err);
+    return res.status(500).json({ error: "Erro interno de autenticação" });
   }
 };
