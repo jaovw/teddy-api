@@ -53,6 +53,33 @@ Este projeto já inclui um **Dockerfile** e um arquivo **docker-compose.yml** qu
    ```bash
    docker-compose up --build
 
+2. **Criar seu arquivo .env conforme exemplo disponibilizado**:
+
+   Para facilitar deixarei um exemplo prático funcional 👇
+
+   
+   ```bash
+   APP_DEBUG=true
+
+   NODE_APP_HOST=localhost
+   
+   NODE_LOCAL_PORT=3001
+   NODE_DOCKER_PORT=3000
+   
+   MYSQL_HOST=localhost
+   MYSQL_LOCAL_PORT=3307
+   MYSQL_DOCKER_PORT=3306
+   MYSQL_DATABASE=teddy
+   MYSQL_USERNAME=root
+   MYSQL_PASSWORD=root
+   
+   REDIS_PORT=6379
+   REDIS_HOST=redis
+   
+   JWT_SECRET_KEY='My$3cr3tK3y!2024'
+   JWT_TTL=3600
+---
+
 ### 📢 Considerações
 
 Como foi aplicado o fluxo de desenvolvimento a partir do docker, temos a vatagem de não precisar instalar nenhum driver ou ferramenta na maquina local
