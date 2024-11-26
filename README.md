@@ -53,10 +53,15 @@ Este projeto já inclui um **Dockerfile** e um arquivo **docker-compose.yml** qu
    ```bash
    docker-compose up --build
 
-Como foi aplicado o fluxo de desenolvimento inteiro pelo docker, temos a vatagem de não precisar instalar nenhum driver ou ferramenta na maquina local
+### 📢 Considerações
+
+Como foi aplicado o fluxo de desenvolvimento a partir do docker, temos a vatagem de não precisar instalar nenhum driver ou ferramenta na maquina local
+
 Logo quando o container docker é iniciado ele já está preparado para criar as tabelas necessárias no banco de dados e assim que disponivel é possível realizar as requisições pelo Postman ou Insomnia
 
-### 🎲 Banco de Dados
+**Ou seja** é necessário utilizar o docker para testar o projeto!
+
+## 🎲 Banco de Dados
 
 O banco de dados utilizado é o **MySQL**, que é configurado e gerenciado pelo Sequelize. Ele armazena informações sobre os usuários e as URLs encurtadas.
 
