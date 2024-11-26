@@ -1,18 +1,16 @@
 import { Request, Response } from "express";
-import { usuarioCriarService } from "../services/usuario-criacao-service";
+import { usuarioService } from "../services/usuario-service";
 
 export namespace usuarioController {
   export const criar = async (req: Request, res: Response): Promise<void> => {
     try {
       const { email, password } = req.body;
 
-      // Validação básica
       if (!email || !password) {
         res.status(400).json({ message: "Email e senha são obrigatórios." });
       }
 
-      // Chama o serviço para criar o usuário
-      const usuario = await usuarioCriarService({ email, password });
+      const usuario = await usuarioService.criar({ email, password });
 
       res.status(201).json(usuario);
     } catch (error) {
